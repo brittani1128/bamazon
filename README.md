@@ -24,17 +24,18 @@ node bamazonCustomer.js
 ```
 
 Follow the prompts to select which product ID you would like to purchase and quanity
+<img src="images/custPurch.png" width="300">
 
-![](images/custPurch.png)
 
 Select YES to make another purchase.  
 If attempting to purchase more than stock quantity, customer will receive an 'Insufficient Quantity' error.
 
-![](images/custPurch2.png)
+<img src="images/custPurch2.png" width="300">
+
 
 Select NO to finish purchase
 
-![](images/custEnd.png)
+<img src="images/custEnd.png" width="300">
 
 
 ### AS A MANAGER:
@@ -44,21 +45,24 @@ node bamazonManager.js
 ```
 Select desired menu option
 
-![](images/manMenuOptions.png)
+<img src="images/manMenuOptions.png" width="300">
 
 View current products available
 
-![](images/manView.png)
+<img src="images/manView.png" width="300">
 
 View products with low inventory
 
-![](images/lowInv.png)
+<img src="images/lowInv.png" width="300">
+
 
 Add inventory to a product
 
-![](images/addInv.png)
+<img src="images/addInv.png" width="300">
+
 
 Add a new product
 
-![](images/addProd.png)
+<img src="images/addProd.png" width="300">
+
 
