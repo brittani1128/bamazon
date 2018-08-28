@@ -1,4 +1,5 @@
-// DEPENDENCIES ===============================================
+
+// DEPENDENCIES ==========================================
 
 var mysql = require("mysql");
 var inquirer = require("inquirer");
@@ -7,7 +8,7 @@ var chalk = require("chalk");
 
 
 
-//VARIABLES =================================================
+//VARIABLES ==============================================
 
 var choice;
 var lowStock = 5;
@@ -20,7 +21,7 @@ var department;
 var price;
 var quantity;
 
-//CONNECT TO DATABASE =========================================
+//CONNECT TO DATABASE ====================================
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -74,7 +75,9 @@ function viewProducts(){
         if (err) throw err;
         console.log("\nPRODUCTS: \n")
         console.table(res);
+        selectAgain();
     });
+    
 }
 
 //**********HOW DO I LOOK FOR <= 5 QUANTITY***********
@@ -83,11 +86,13 @@ function lowInv(){
         if (err) throw err;
         console.log("\nLOW INVENTORY: \n")
         console.table(res);
+        selectAgain();
     });
+  
 }
 
 function addInv(){
-    viewProducts();
+    // viewProducts();
     inquirer.prompt([
         {
             type:"input",
@@ -108,9 +113,9 @@ function addInv(){
             if (err) throw err;
             stock = parseInt(res[0].stock_quantity);
             stock = stock + itemAmount;
-            updateStock();
+            updateStock();     
         });
-           
+        
     });
 }
 
@@ -149,9 +154,10 @@ function addProduct(){
         connection.query(query,function(err,res){
             if (err) throw err;
             console.log("\nItem added successfully!");
-            return;
+            
+            selectAgain();
         });
-        viewProducts();
+        
     });
 }
 
@@ -159,9 +165,25 @@ function addProduct(){
 function updateStock() {
     connection.query("UPDATE products SET stock_quantity=? WHERE item_id=?", [stock, itemId], function (err) {
         if (err) throw err;
-        console.log("Stock quantity updated successfully!");
+        console.log("\nStock quantity updated successfully!\n");
+        selectAgain();
     });
 }
 
 
-
+function selectAgain(){
+    inquirer.prompt([
+        {
+            type:"list",
+            name:"again",
+            message:"\nWould you like to view the Menu Options again?",
+            choices:["YES", "NO"]
+        }
+    ]).then(function(response){
+        if (response.again === "YES"){
+            start();
+        } else {
+            return;
+        }
+    });
+}
